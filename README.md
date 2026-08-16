@@ -54,6 +54,17 @@
    - หน้าเว็บฝั่งนักศึกษา (User): http://localhost:3000
    - หน้าเข้าสู่ระบบเจ้าหน้าที่ (Admin Login): http://localhost:3000/login
 
+---
+
+## 🔑 บัญชีผู้ใช้ทดสอบระบบ (Test Credentials & Seed Data)
+
+* **URL เข้าสู่ระบบ:** `http://localhost:3000/login`
+* **Username:** `admin`
+* **Password:** `admin123` *(หรือรหัสผ่านที่กำหนดไว้ในไฟล์ seed.js)*
+* **Seed Data:** ระบบเตรียมข้อมูลคำขอทุนตัวอย่างไว้ในระบบ 25+ รายการ ครอบคลุมทุกประเภททุนและทุกสถานะ (`PENDING`, `APPROVED`, `REJECTED`)
+
+---
+
 ## 📂 โครงสร้างโปรเจกต์ (Project Structure)
    ```├── src/
       │   ├── app/
