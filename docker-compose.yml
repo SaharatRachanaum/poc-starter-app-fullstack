@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: scholarship_db
+    restart: always
+    environment:
+      POSTGRES_DB: scholarship_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - scholarship_net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: scholarship_backend
+    restart: always
+    environment:
+      DATABASE_URL: postgres://postgres:postgres123@postgres:5432/scholarship_db?sslmode=disable
+      JWT_SECRET: secret123
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - scholarship_net
+    command: sh -c "npx prisma db push && npx prisma db seed && node src/index.js"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: scholarship_frontend
+    restart: always
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - scholarship_net
+
+volumes:
+  postgres_data:
+
+networks:
+  scholarship_net:
+    driver: bridge
