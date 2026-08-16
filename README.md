@@ -12,13 +12,13 @@
 * **ตัวเลือกชั้นปี:** รองรับตัวเลือกชั้นปีตั้งแต่ ปี 1 ถึง ปี 8 ครบถ้วน
 
 ### 🔐 ฝั่งเจ้าหน้าที่ (Admin Dashboard)
-* **Auth Guard & Security:** ระบบเข้าสู่ระบบ (Login/Logout) ป้องกันการเข้าถึงหน้าจัดการด้วย Token (/admin/dashboard)
+* **Auth Guard & Security:** ระบบเข้าสู่ระบบ (Login/Logout) ป้องกันการเข้าถึงหน้าจัดการด้วย Token (`/admin/dashboard`)
 * **Dashboard & Charts:** การ์ดสรุปจำนวนคำขอทั้งหมด, รอพิจารณา, อนุมัติ และปฏิเสธ พร้อมกราฟโดนัท (สัดส่วนสถานะ) และกราฟแท่ง (จำนวนแยกตามประเภททุน)
 * **ตารางรายการ & Pagination:** แสดงรายการคำขอ พร้อมระบบแบ่งหน้า (10 รายการ/หน้า)
 * **ค้นหา & กรองข้อมูล:** ค้นหาด้วยชื่อ/รหัส/อีเมล และกรองตามสถานะหรือประเภททุนได้ทันที
-* **การพิจารณาคำขอ:** ออนุมัติหรือปฏิเสธคำขอ พร้อมระบุหมายเหตุการพิจารณา (Admin Remark) ผ่าน Custom Modal
+* **การพิจารณาคำขอ:** อนุมัติหรือปฏิเสธคำขอ พร้อมระบุหมายเหตุการพิจารณา (Admin Remark) ผ่าน Custom Modal
 * **การจัดการข้อมูล:** รองรับการเพิ่มคำขอแทนนักศึกษา (Admin Create) และการแก้ไขข้อมูลคำขอ
-* **Soft Delete:** อนุญาตให้ลบคำเฉพาะรายการที่อยู่ในสถานะ PENDING เท่านั้น พร้อมยืนยันก่อนลบ
+* **Soft Delete:** อนุญาตให้ลบคำขอเฉพาะรายการที่อยู่ในสถานะ PENDING เท่านั้น พร้อมยืนยันก่อนลบ
 * **Data Masking & Export:** ปิดบังเลขที่บัญชีธนาคารเพื่อความปลอดภัย (Masked Account) และฟังก์ชัน Export ข้อมูลทั้งหมดเป็นไฟล์ CSV
 
 ---
@@ -26,7 +26,7 @@
 ## 🛠 เทคโนโลยีที่ใช้ (Tech Stack)
 
 * **Frontend:** Next.js (App Router), React, Tailwind CSS, Chart.js / React-ChartJS-2
-* **Backend:** Go (Golang) / RESTful API 
+* **Backend:** Node.js / Express / Prisma ORM / RESTful API
 * **Database:** PostgreSQL
 * **Containerization:** Docker & Docker Compose
 
@@ -75,16 +75,14 @@
 
 ## 📂 โครงสร้างโปรเจกต์ (Project Structure)
    ```
-      ├── src/
-      │   ├── app/
-      │   │   ├── page.js             # หน้าแรก (แบบฟอร์มยื่นคำขอของนักศึกษา + PDPA)
-      │   │   ├── login/
-      │   │   │   └── page.js         # หน้าเข้าสู่ระบบสำหรับเจ้าหน้าที่
-      │   │   └── admin/
-      │   │       └── dashboard/
-      │   │           └── page.js     # หน้า Admin Dashboard (กราฟ, ตาราง, Modal จัดการ)
-      │   └── ...
-      ├── Dockerfile                  # สำหรับ Build Frontend Next.js
-      ├── docker-compose.yml          # ไฟล์รวม Docker Services
-      └── README.md                   # คู่มือการใช้งานระบบ
+   ├── backend/                    # Node.js / Prisma Backend Service
+   │   ├── prisma/                 # Schema & Seed Script (seed.js)
+   │   ├── src/                    # API Routes & Controllers
+   │   └── Dockerfile
+   ├── frontend/                   # Next.js Frontend Service
+   │   ├── src/app/                # App Router (User Form & Admin Dashboard)
+   │   └── Dockerfile
+   ├── .env.example                # ไฟล์ตัวอย่าง Environment Variables
+   ├── docker-compose.yml          # ไฟล์รวม Docker Services
+   └── README.md                   # คู่มือการใช้งานระบบ
    ```
