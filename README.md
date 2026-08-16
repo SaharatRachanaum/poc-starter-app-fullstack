@@ -46,7 +46,7 @@
    ตรวจสอบหรือตั้งค่าไฟล์ .env สำหรับเชื่อมต่อระบบ (เช่น POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, JWT_SECRET) และตั้งค่า NEXT_PUBLIC_API_URL ให้ชี้ไปยัง Backend API
 
 3. **รันระบบด้วย Docker Compose**
-   ```
+   ```bash
    docker-compose up --build
    ```
 
@@ -62,6 +62,14 @@
 * **Username:** `admin`
 * **Password:** `admin123` *(หรือรหัสผ่านที่กำหนดไว้ในไฟล์ seed.js)*
 * **Seed Data:** ระบบเตรียมข้อมูลคำขอทุนตัวอย่างไว้ในระบบ 25+ รายการ ครอบคลุมทุกประเภททุนและทุกสถานะ (`PENDING`, `APPROVED`, `REJECTED`)
+
+ **คำสั่งสำหรับสั่ง Seed ข้อมูลใหม่ด้วยตนเอง (Manual Seed):**
+* **Automatic Seed:** เมื่อรันคำสั่ง `docker-compose up --build` ระบบจะทำการ Migrate Structure และนำเข้าข้อมูล Seed Data ให้อัตโนมัติทันที
+* **Manual Seed:**  หากต้องการสั่งสร้างตารางและ Seed ข้อมูลตัวอย่างเข้าฐานข้อมูลใหม่ด้วยตนเอง สามารถเข้าไปที่โฟลเดอร์ `backend` แล้วรันคำสั่ง:
+   ```bash
+   cd backend
+   npx prisma db seed
+   ```
 
 ---
 
