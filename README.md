@@ -46,7 +46,8 @@
    ตรวจสอบหรือตั้งค่าไฟล์ .env สำหรับเชื่อมต่อระบบ (เช่น POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, JWT_SECRET) และตั้งค่า NEXT_PUBLIC_API_URL ให้ชี้ไปยัง Backend API
 
 3. **รันระบบด้วย Docker Compose**
-   ```docker-compose up --build
+   ```
+   docker-compose up --build
    ```
 
 4. **เข้าใช้งานระบบผ่าน Browser**
